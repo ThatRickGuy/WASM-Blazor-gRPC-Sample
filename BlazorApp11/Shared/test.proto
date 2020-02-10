@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "BlazorApp11.Shared";
+
+package test;
+
+service tests {
+  rpc GetTests (google.protobuf.Empty) returns (TestReply);
+}
+
+message TestReply {
+  repeated Test tests = 1;
+}
+
+message Test {
+  string Value = 1;
+}
+

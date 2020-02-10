@@ -1,0 +1,24 @@
+﻿@page "/fetchdata"
+@using BlazorApp11.Shared
+@inject HttpClient Http
+@inject BlazorApp11.Shared.tests.testsClient client
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching gRPC data from the server.</p>
+<p>@TestResultString</p>
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    private string TestResultString;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Starting gRPC call");
+        var q =await client.GetTestsAsync(new Google.Protobuf.WellKnownTypes.Empty(), null);
+        Console.WriteLine("gRPC call complete, accessing");
+        TestResultString = q.Tests.First().Value;
+        Console.WriteLine("accessing complete");
+    }
+
+}
